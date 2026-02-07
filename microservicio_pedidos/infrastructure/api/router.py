@@ -1,15 +1,12 @@
 from fastapi import APIRouter, HTTPException
-# Imports absolutos obligatorios
 from microservicio_pedidos.domain.pedido import Pedido, PedidoCreate, PedidoUpdate
 from microservicio_pedidos.infrastructure.adapters.memory_pedido_repo import InMemoryPedidoRepository
 
 router = APIRouter()
-# Instanciamos el repositorio
 repo = InMemoryPedidoRepository()
 
 @router.post("/pedidos/", response_model=Pedido)
 def crear_pedido(pedido_in: PedidoCreate):
-    # Generar ID automático (Autoincremental simple)
     nuevo_id = 1
     if repo.db:
         nuevo_id = max(p.id_pedido for p in repo.db) + 1
@@ -30,7 +27,6 @@ def actualizar_pedido(id_pedido: int, datos: PedidoUpdate):
     if not pedido_existente:
         raise HTTPException(status_code=404, detail="Pedido no encontrado")
     
-    # Actualizamos solo los campos que vienen en 'datos'
     pedido_actualizado = pedido_existente.model_copy(update=datos.model_dump(exclude_unset=True))
     return repo.update(pedido_actualizado)
 

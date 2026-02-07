@@ -7,7 +7,6 @@ repo = InMemoryUsuarioRepository() # Instancia de la BD en memoria
 
 @router.post("/usuarios/", response_model=Usuario)
 def crear_usuario(usuario_in: UsuarioCreate):
-    # Lógica simple para generar ID automático
     nuevo_id = 1
     if repo.db:
         nuevo_id = max(u.idusuario for u in repo.db) + 1
@@ -28,7 +27,6 @@ def actualizar_usuario(idusuario: int, datos: UsuarioUpdate):
     if not usuario_existente:
         raise HTTPException(status_code=404, detail="Usuario no encontrado")
     
-    # Actualizamos solo los campos enviados
     datos_actualizados = usuario_existente.model_copy(update=datos.model_dump(exclude_unset=True))
     return repo.update(datos_actualizados)
 

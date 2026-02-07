@@ -1,6 +1,5 @@
 from abc import ABC, abstractmethod
 from typing import Optional, List
-# Import absoluto para evitar errores
 from microservicio_pedidos.domain.pedido import Pedido
 
 class PedidoRepository(ABC):

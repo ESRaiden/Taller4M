@@ -1,15 +1,15 @@
 from pydantic import BaseModel, EmailStr
 from typing import Optional
 
-class Usuario(BaseModel):
-    idusuario: int
+class Paciente(BaseModel):
+    id_paciente: int
     nombre: str
     email: EmailStr
 
-class UsuarioCreate(BaseModel):
+class PacienteCreate(BaseModel):
     nombre: str
     email: EmailStr
 
-class UsuarioUpdate(BaseModel):
+class PacienteUpdate(BaseModel):
     nombre: Optional[str] = None
     email: Optional[EmailStr] = None

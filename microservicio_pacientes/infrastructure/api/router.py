@@ -1,5 +1,6 @@
 from fastapi import APIRouter, HTTPException
 from microservicio_pacientes.domain.paciente import Paciente, PacienteCreate, PacienteUpdate
+# CORRECCIÓN: El archivo se llama memory_paciente_repo, no paciente_repository
 from microservicio_pacientes.infrastructure.adapters.memory_paciente_repo import InMemoryPacienteRepository
 
 router = APIRouter()
